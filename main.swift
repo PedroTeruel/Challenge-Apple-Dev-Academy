@@ -16,10 +16,10 @@ enum Local: Int{
 func introJogo(){
     print("")
     print("------------------------------------------------------------")
-    print("    A ILHA PROIBIDA - by Pedro Henrique Hossaka Teruel     ")
+    print("    A ILHA PROIBIDA ☠️ - by Pedro Henrique Hossaka Teruel     ")
     print("------------------------------------------------------------")
     print("")
-    print("Você é um jovem guerreiro do reino de Teruel, que foi convocado para uma missão em terras extrangeiras. Durante essa missão, um de seus aliados traiu o reino, e armou uma emboscada para você.")
+    print("Você é um jovem guerreiro do reino de Teruel, que foi convocado para uma missão em terras extrangeiras. Durante essa missão, um de seus aliados traiu o reino, e armou uma emboscada para você. ⚔️ ")
     print("")
     print("Na tentativa voltar para o reino e avisar o Rei sobre a traição, seu barco é destruido perto das Ilhas Proibidas, onde nem os melhores guerreiros conseguiram sair.")
     print("")
@@ -177,10 +177,10 @@ let nomeLugar: [Local: String] = [
 let nomeItens: [String] = ["Pedra forjada pelos goblins anciãos", "Cristal da sabedoria", "Chama da esperança", "Pergaminho guia do portal"]
 
 func configItens(){
-    itemLoc[.florestaSombria] = "Pedra forjada pelos goblins anciãos"
-    itemLoc[.montanhasDoDesespero] = "Cristal da sabedoria"
-    itemLoc[.cavernaAmaldicoada] = "Chama da esperança"
-    itemLoc[.ruinasDoPortal] = "Pergaminho guia do portal"
+    itemLoc[.florestaSombria] = "Pedra forjada pelos goblins anciãos. 🪨"
+    itemLoc[.montanhasDoDesespero] = "Cristal da sabedoria. 💎 "
+    itemLoc[.cavernaAmaldicoada] = "Chama da esperança. 🔥 "
+    itemLoc[.ruinasDoPortal] = "Pergaminho guia do portal. 📜 "
 }
 
 func explorar(local: Local){
@@ -207,12 +207,12 @@ func encontrarItem(in local: Local){
         if inventario.contains(item){
             print("Você sente a energia do artefato magico que já coletou aqui.")
         } else{
-            print("PARABENS, VOCE ENCONTROU UM ARTEFATO MAGICO! ")
+            print("PARABENS, VOCE ENCONTROU UM ARTEFATO MAGICO! ✨ ")
             print("ARTEFATO OBTIDO: \(item)")
             inventario.insert(item)
         }
     } else{
-        print("Você sente magia no ar, mas não encontra nada. e deve procurar aqui mais tarde!")
+        print("Você sente magia no ar, mas não encontra nada. e deve procurar aqui mais tarde! ⏳ ")
     }
 }
 
@@ -263,9 +263,9 @@ func mostrarObjetivo(){
 func verificarConclusao(){
     if inventario.count == nomeItens.count{
         print("")
-        print("            TODOS OS ARTEFATOS FORAM REUNIDOS!")
+        print("            TODOS OS ARTEFATOS FORAM REUNIDOS! 🙌 ")
         print("")
-        print("O portal é reconstruido utilizando os artificios coletados durante a jornada. Agora, \(nomeJogador) pode retornar ao Reino Teruel!")
+        print("O portal é reconstruido utilizando os artificios coletados durante a jornada. Agora, \(nomeJogador) pode retornar ao Reino Teruel! 🏰 ")
         print("")
         jogoRoda = false
     }
