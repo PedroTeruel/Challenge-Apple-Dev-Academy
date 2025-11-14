@@ -1,3 +1,10 @@
+//
+//  main.swift
+//  Challenge
+//
+//  Created by PEDRO HENRIQUE HOSSAKA TERUEL on 14/11/25.
+//
+
 import Foundation
 
 var nomeJogador = ""
