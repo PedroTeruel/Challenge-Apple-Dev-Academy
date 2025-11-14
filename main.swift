@@ -10,12 +10,8 @@ enum Local: Int{
     case montanhasDoDesespero = 2
     case cavernaAmaldicoada = 3
     case ruinasDoPortal = 4
-    case def = 5
 }
 
-enum ErroOpcao: Error {
-    case nulo, nExiste
-}
 
 func introJogo(){
     print("")
@@ -105,24 +101,9 @@ func explorarIlha(){
         3: .cavernaAmaldicoada,
         4: .ruinasDoPortal
     ]
+    
     let entrada = lerOpcao()
     if let valor = entrada {
-        
-        
-        func checarOpcao(_ opcao: Int) throws -> String{
-            if opcao == 0{
-                throw ErroOpcao.nulo
-            }else if let loc = mapaEscolhas[valor]{
-                if loc in 1...4{
-                    explorar(local: loc)
-                }else{
-                    throw ErroOpcao.nExiste
-                }
-                
-            }
-        }
-        
-        
         if let loc = mapaEscolhas[valor]{
             explorar(local: loc)
         }else{
@@ -250,7 +231,7 @@ func mostrarObjetivo() {
 func verificarConclusao() {
     if inventario.count == nomeItens.count {
         print("")
-        print("          TODOS OS ARTEFATOS FORAM REUNIDOS!")
+        print("            TODOS OS ARTEFATOS FORAM REUNIDOS!")
         print("")
         print("O portal é reconstruido utilizando os artificios coletados durante a jornada. Agora, \(nomeJogador) pode retornar ao Reino Teruel!")
         print("")
