@@ -10,6 +10,7 @@ enum Local: Int{
     case montanhasDoDesespero = 2
     case cavernaAmaldicoada = 3
     case ruinasDoPortal = 4
+    case voltar = 5
 }
 
 func introJogo(){
@@ -22,7 +23,7 @@ func introJogo(){
     print("")
     print("Na tentativa voltar para o reino e avisar o Rei sobre a traição, seu barco é destruido perto das Ilhas Proibidas, onde nem os melhores guerreiros conseguiram sair.")
     print("")
-    print("Seu objetivo então, se torna reunir 4 artefatos mágicos para reconstruir um antigo portal localizado no centro da ilha, para entao retornar ao reino e avisar o Rei.")
+    print("Seu objetivo então, se torna reunir os 4 artefatos mágicos localizados cada um em uma parte da ilha, para reconstruir um antigo portal localizado no centro da ilha, para entao retornar ao reino e avisar o Rei.")
     print("")
 }
 
@@ -91,6 +92,7 @@ func explorarIlha(){
     print("2- Montanhas do Desespero")
     print("3- Caverna Amaldiçoada")
     print("4- Ruínas do Portal")
+    print("5- Voltar")
     print("")
     print("Escolha um local para explorar: ")
     
@@ -98,20 +100,21 @@ func explorarIlha(){
         1: .florestaSombria,
         2: .montanhasDoDesespero,
         3: .cavernaAmaldicoada,
-        4: .ruinasDoPortal
+        4: .ruinasDoPortal,
+        5: .voltar
     ]
     
     
     
     let entrada = lerOpcao()
-    if let valor = entrada {
+    if let valor = entrada{
         enum ErroOpcao: Error{
             case nulo, inexistente
         }
         func checarOpcao(_ opcao: Int) throws -> String{
             if opcao == 0{
                 throw ErroOpcao.nulo
-            }else if opcao > 4{
+            }else if opcao > 5{
                 throw ErroOpcao.inexistente
             }else{
                 return "Ótima Escolha..."
@@ -120,7 +123,7 @@ func explorarIlha(){
         
         
         
-        do {
+        do{
             let escolhido = try checarOpcao(valor)
             print("")
             print(escolhido)
@@ -130,12 +133,14 @@ func explorarIlha(){
         }catch{
             print("")
             print("O local escolhido, \(valor), é inválido, por favor, escolha um local válido.")
+            explorarIlha()
         }
 
         
     }else{
         print("")
         print("Local inválido, escolha um local válido.")
+        explorarIlha()
     }
 }
 
@@ -165,28 +170,29 @@ let nomeLugar: [Local: String] = [
     .florestaSombria: "Floresta Sombria",
     .montanhasDoDesespero: "Montanhas do Desespero",
     .cavernaAmaldicoada: "Caverna Amaldiçoada",
-    .ruinasDoPortal: "Ruínas do Portal"
+    .ruinasDoPortal: "Ruínas do Portal",
+    .voltar: "Voltar"
 ]
 
 let nomeItens: [String] = ["Pedra forjada pelos goblins anciãos", "Cristal da sabedoria", "Chama da esperança", "Pergaminho guia do portal"]
 
-func configItens() {
+func configItens(){
     itemLoc[.florestaSombria] = "Pedra forjada pelos goblins anciãos"
     itemLoc[.montanhasDoDesespero] = "Cristal da sabedoria"
     itemLoc[.cavernaAmaldicoada] = "Chama da esperança"
     itemLoc[.ruinasDoPortal] = "Pergaminho guia do portal"
 }
 
-func explorar(local: Local) {
+func explorar(local: Local){
     print("")
     
-    if let desc = descricaoLoc[local] {
+    if let desc = descricaoLoc[local]{
         print(desc)
     }
     let chance = Int.random(in: 0...99)
-    if chance < 50 {
+    if chance < 60{
         encontrarItem(in: local)
-    } else if chance < 75 {
+    } else if chance < 75{
         mostrarEventoNarrativo()
     } else {
         print("Nada de interessante foi encontrado.")
@@ -194,40 +200,40 @@ func explorar(local: Local) {
     verificarConclusao()
 }
 
-func encontrarItem(in local: Local) {
+func encontrarItem(in local: Local){
     let artefato = itemLoc[local]
     
-    if let item = artefato {
-        if inventario.contains(item) {
+    if let item = artefato{
+        if inventario.contains(item){
             print("Você sente a energia do artefato magico que já coletou aqui.")
-        } else {
+        } else{
             print("PARABENS, VOCE ENCONTROU UM ARTEFATO MAGICO! ")
             print("ARTEFATO OBTIDO: \(item)")
             inventario.insert(item)
         }
-    } else {
+    } else{
         print("Você sente magia no ar, mas não encontra nada. e deve procurar aqui mais tarde!")
     }
 }
 
-func mostrarEventoNarrativo() {
-    if eventosRandom.isEmpty {
+func mostrarEventoNarrativo(){
+    if eventosRandom.isEmpty{
         print("O silêncio domina o local...")
-    } else {
+    } else{
         let x = Int.random(in: 0..<eventosRandom.count)
         print("Evento misterioso:")
         print(eventosRandom[x])
     }
 }
 
-func mostrarInventario() {
+func mostrarInventario(){
     print("")
     print("                    INVENTÁRIO")
     
-    if inventario.isEmpty {
+    if inventario.isEmpty{
         print("Nenhum artefato coletado ainda.")
-    } else {
-        for item in inventario {
+    }else{
+        for item in inventario{
             print("- \(item)")
         }
     }
@@ -235,17 +241,17 @@ func mostrarInventario() {
     print("ARTEFATOS COLETADOS: \(inventario.count)/\(nomeItens.count)")
 }
 
-func mostrarObjetivo() {
+func mostrarObjetivo(){
     print("")
     print("                    OBJETIVO")
     print("Para sair da ilha e retornar para o seu reino, é necessario coletar todos os materiais da lista, para assim, reconstruir o portal")
     
     var i = 0
-    while i < nomeItens.count {
+    while i < nomeItens.count{
         let item = nomeItens[i]
         var prog = "[ ]"
         
-        if inventario.contains(item) {
+        if inventario.contains(item){
             prog = "[X]"
         }
         
@@ -254,8 +260,8 @@ func mostrarObjetivo() {
     }
 }
 
-func verificarConclusao() {
-    if inventario.count == nomeItens.count {
+func verificarConclusao(){
+    if inventario.count == nomeItens.count{
         print("")
         print("            TODOS OS ARTEFATOS FORAM REUNIDOS!")
         print("")
