@@ -197,7 +197,7 @@ func explorar(local: Local){
         print(desc)
     }
     let chance = Int.random(in: 0...99)
-    if chance < 60{
+    if chance < 55{
         encontrarItem(in: local)
     } else if chance < 75{
         mostrarEventoNarrativo()
@@ -274,6 +274,11 @@ func verificarConclusao(){
         print("")
         print("O portal é reconstruido utilizando os artificios coletados durante a jornada. Agora, \(nomeJogador) pode retornar ao Reino Teruel! 🏰 ")
         print("")
+        print("         FIM!")
+        print("")
+        print("Obrigado por jogar")
+        print("")
+        print("by PEDRO HENRIQUE HOSSAKA TERUEL")
         jogoRoda = false
     }
 }
