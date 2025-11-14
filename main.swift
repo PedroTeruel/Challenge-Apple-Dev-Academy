@@ -12,7 +12,6 @@ enum Local: Int{
     case ruinasDoPortal = 4
 }
 
-
 func introJogo(){
     print("")
     print("------------------------------------------------------------")
@@ -36,13 +35,11 @@ func nomeGuerreiro(){
         if nome.isEmpty{
             nomeJogador = "Guerreiro Anonimo"
         }else{
-            
             nomeJogador = nome
         }
     }else{
         nomeJogador = "Guerreiro Anonimo"
     }
-    
     print("")
     print("Muito bem \(nomeJogador)! A Ilha Proibida espera por você...")
     print("")
@@ -70,10 +67,12 @@ func menu(){
             case 4:
                 sairJogo()
             default:
-                print("Opção inválida, digite um numero válido.")
+                print("")
+                print("Opção \(numero) é inválida, por favor, digite um numero válido.")
             }
         }else{
-            print("Opção inválida, digite um numero válido.")
+            print("")
+            print("Por favor, digite um numero válido.")
         }
     }
 }
@@ -87,7 +86,7 @@ func lerOpcao() -> Int?{
 
 func explorarIlha(){
     print("")
-    print("                    LOCAIS DA ILHA PROIBIDA")
+    print("                 LOCAIS DA ILHA PROIBIDA")
     print("1- Floresta Sombria")
     print("2- Montanhas do Desespero")
     print("3- Caverna Amaldiçoada")
@@ -102,14 +101,40 @@ func explorarIlha(){
         4: .ruinasDoPortal
     ]
     
+    
+    
     let entrada = lerOpcao()
     if let valor = entrada {
-        if let loc = mapaEscolhas[valor]{
-            explorar(local: loc)
-        }else{
-            print("Local inválido, escolha um local válido.")
+        enum ErroOpcao: Error{
+            case nulo, inexistente
         }
+        func checarOpcao(_ opcao: Int) throws -> String{
+            if opcao == 0{
+                throw ErroOpcao.nulo
+            }else if opcao > 4{
+                throw ErroOpcao.inexistente
+            }else{
+                return "Ótima Escolha..."
+            }
+        }
+        
+        
+        
+        do {
+            let escolhido = try checarOpcao(valor)
+            print("")
+            print(escolhido)
+            if let loc = mapaEscolhas[valor]{
+                explorar(local: loc)
+            }
+        }catch{
+            print("")
+            print("O local escolhido, \(valor), é inválido, por favor, escolha um local válido.")
+        }
+
+        
     }else{
+        print("")
         print("Local inválido, escolha um local válido.")
     }
 }
@@ -213,6 +238,7 @@ func mostrarInventario() {
 func mostrarObjetivo() {
     print("")
     print("                    OBJETIVO")
+    print("Para sair da ilha e retornar para o seu reino, é necessario coletar todos os materiais da lista, para assim, reconstruir o portal")
     
     var i = 0
     while i < nomeItens.count {
