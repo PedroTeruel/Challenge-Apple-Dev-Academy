@@ -38,7 +38,5 @@ As opçoes do menu são:
     4- Ao selecionar a opção 4, o jogo apresenta uma mensagem de saida e termina.
 
 
-## Conclusão
-
 
       
